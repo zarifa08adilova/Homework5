@@ -42,12 +42,6 @@ Meal Quantity: {MealsQuantity}";
             this.Toys = Toy;
         }
 
-        public string V1 { get; }
-        public int V2 { get; }
-        public int V3 { get; }
-        public float V4 { get; }
-        public float V5 { get; }
-
         public override void Eat()
         {
             Energy += 10;
@@ -195,38 +189,85 @@ Meal Quantity: {MealsQuantity}";
         }
     }
 
-    //class PetShop
-    //{
-    //    public Pets Cats { get; set; }
-    //    public Pets Dogs { get; set; }
-    //    public Pets Birds { get; set; }
-    //    public Pets Fish { get; set; }
-    //}
+    class PetShop
+    {
+        List<Pets> pets = new List<Pets>();
 
+        public PetShop() { }
+        public PetShop(List<Pets> pets)
+        {
+            this.pets = pets;
+        }
+
+        public void AddPet(Pets pet)
+        {
+            pets.Add(pet);
+        }
+
+        public void RemoveByNickname(string nickname)
+        {
+            Pets pet = pets.Find(p => p.Nickname == nickname);
+
+            if (pet != null)
+            {
+                pets.Remove(pet);
+                Console.WriteLine("Pet Removed.");
+            }
+            else
+            {
+                Console.WriteLine("Pet not found.");
+            }
+        }
+
+        public void ShowPets()
+        {
+            foreach (Pets pet in pets)
+            {
+                Console.WriteLine(pet);
+                Console.WriteLine("----------------------------");
+            }
+
+        }
+    }
     static void Main(string[] args)
     {
-        //Cats cat = new Cats("Meredith", 14, "Female", 100, 500f, 50f, "Mousy");
-        //cat.Eat();
-        //cat.Play(cat);
-        //cat.Sleep();
-        //Console.WriteLine(cat.ToString());
+        PetShop petShop = new PetShop();
+        Cats cat = new Cats("Meredith", 14, "Female", 100, 500f, 50f, "Mousy");
+        cat.Eat();
+        cat.Play(cat);
+        cat.Sleep();
+        Console.WriteLine(cat.ToString());
+        Console.WriteLine();
 
-        //Dogs dog = new Dogs("Wendy", 3, "Female", 100, 1500f, 100f, "Red");
-        //dog.Eat();
-        //dog.Play(dog);
-        //dog.Sleep();
-        //Console.WriteLine(dog.ToString());
+        Dogs dog = new Dogs("Wendy", 3, "Female", 100, 1500f, 100f, "Red");
+        dog.Eat();
+        dog.Play(dog);
+        dog.Sleep();
+        Console.WriteLine(dog.ToString());
+        Console.WriteLine();
 
-        //Birds bird = new Birds("Birdy", 5, "Female", 100, 100f, 30f, true);
-        //bird.Eat();
-        //bird.Play(bird);
-        //bird.Sleep();
-        //Console.WriteLine(bird.ToString());
+        Birds bird = new Birds("Birdy", 5, "Female", 100, 100f, 30f, true);
+        bird.Eat();
+        bird.Play(bird);
+        bird.Sleep();
+        Console.WriteLine(bird.ToString());
+        Console.WriteLine();
 
-        //Fish fish = new Fish("Nemo", 2, "Male", 100, 50f, 10f, "Koi");
-        //fish.Eat();
-        //fish.Play(fish);
-        //fish.Sleep();
-        //Console.WriteLine(fish.ToString());
+        Fish fish = new Fish("Nemo", 2, "Male", 100, 50f, 10f, "Koi");
+        fish.Eat();
+        fish.Play(fish);
+        fish.Sleep();
+        Console.WriteLine(fish.ToString());
+        Console.WriteLine();
+
+        petShop.AddPet(cat);
+        petShop.AddPet(dog);
+        petShop.AddPet(bird);
+        petShop.AddPet(fish);
+
+        petShop.ShowPets();
+        petShop.RemoveByNickname("Birdy");
+
+        petShop.ShowPets();
     }
 }
